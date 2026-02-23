@@ -1,0 +1,32 @@
+import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from database import seed_database
+from routes import resume, chat
+
+app = FastAPI(title="Pritam Chavan Portfolio API", version="1.0.0")
+
+# CORS — restrict to frontend URL in production, allow all in dev
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+allowed_origins = [FRONTEND_URL] if FRONTEND_URL else ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Seed database on startup
+@app.on_event("startup")
+async def startup_event():
+    seed_database()
+
+# Include routers
+app.include_router(resume.router, prefix="/api")
+app.include_router(chat.router, prefix="/api")
+
+@app.get("/")
+async def root():
+    return {"message": "Pritam Chavan Portfolio API is running!", "docs": "/docs"}

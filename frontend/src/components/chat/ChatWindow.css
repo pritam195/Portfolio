@@ -1,0 +1,195 @@
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-secondary);
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+/* Header */
+.chat-window__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(124, 58, 237, 0.06);
+    flex-shrink: 0;
+}
+
+.chat-window__header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-window__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(124, 58, 237, 0.2);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.chat-window__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.chat-window__subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.chat-window__actions {
+    display: flex;
+    gap: 4px;
+}
+
+.chat-window__btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.chat-window__btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+/* Messages */
+.chat-window__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124, 58, 237, 0.3) transparent;
+}
+
+.chat-window__messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-window__messages::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.3);
+    border-radius: 2px;
+}
+
+/* Suggestions */
+.chat-window__suggestions {
+    padding: 8px 0 4px;
+}
+
+.chat-window__suggest-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chat-window__suggest-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--accent-purple-light);
+    cursor: pointer;
+    margin-bottom: 6px;
+    transition: var(--transition-fast);
+}
+
+.chat-window__suggest-btn:hover {
+    background: rgba(124, 58, 237, 0.15);
+    border-color: rgba(124, 58, 237, 0.4);
+}
+
+/* Input area */
+.chat-window__input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.chat-window__input {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    resize: none;
+    outline: none;
+    transition: var(--transition-fast);
+    max-height: 100px;
+    min-height: 40px;
+    line-height: 1.5;
+}
+
+.chat-window__input::placeholder {
+    color: var(--text-muted);
+}
+
+.chat-window__input:focus {
+    border-color: rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.chat-window__input:disabled {
+    opacity: 0.6;
+}
+
+.chat-window__send {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-purple);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.chat-window__send:hover:not(:disabled) {
+    background: #6d28d9;
+    transform: scale(1.05);
+}
+
+.chat-window__send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.chat-window__send--loading {
+    animation: pulse-ring 1s ease-in-out infinite;
+}

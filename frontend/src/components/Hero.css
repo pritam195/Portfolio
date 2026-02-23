@@ -1,0 +1,208 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 60px;
+}
+
+.hero__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+}
+
+.hero__glow--purple {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+}
+
+.hero__glow--cyan {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, transparent 70%);
+    bottom: -80px;
+    right: -80px;
+    animation-delay: -4s;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-cyan-light);
+    margin-bottom: 24px;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.hero__badge-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    position: relative;
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.hero__badge-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-cyan);
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.hero__name {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+}
+
+.hero__roles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    font-family: var(--font-mono);
+}
+
+.hero__roles-sep {
+    color: var(--accent-purple-light);
+}
+
+.hero__bio {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin: 0 auto 36px;
+    line-height: 1.8;
+}
+
+.hero__highlight {
+    color: var(--accent-purple-light);
+    font-weight: 600;
+}
+
+.hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+}
+
+.hero__stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.hero__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.hero__stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.hero__stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.hero__stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+}
+
+/* Scroll hint */
+.hero__scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero__scroll-mouse {
+    width: 22px;
+    height: 34px;
+    border: 2px solid var(--text-muted);
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.hero__scroll-wheel {
+    width: 3px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    animation: float 2s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+    .hero__stat-divider {
+        display: none;
+    }
+
+    .hero__stats {
+        gap: 20px;
+    }
+}

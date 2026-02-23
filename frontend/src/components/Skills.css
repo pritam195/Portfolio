@@ -1,0 +1,95 @@
+.skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.skills__card {
+    padding: 24px;
+}
+
+.skills__card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.skills__icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.skills__category {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.skills__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Color variants */
+.skills__card--cyan .tech-badge {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: var(--accent-cyan-light);
+}
+
+.skills__card--cyan:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow: var(--shadow-cyan);
+}
+
+.skills__card--pink .tech-badge {
+    background: rgba(236, 72, 153, 0.1);
+    border-color: rgba(236, 72, 153, 0.3);
+    color: #f9a8d4;
+}
+
+.skills__card--pink:hover {
+    border-color: rgba(236, 72, 153, 0.4);
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.2);
+}
+
+.skills__card--green .tech-badge {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #86efac;
+}
+
+.skills__card--green:hover {
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
+}
+
+.skills__card--orange .tech-badge {
+    background: rgba(251, 146, 60, 0.1);
+    border-color: rgba(251, 146, 60, 0.3);
+    color: #fdba74;
+}
+
+.skills__card--orange:hover {
+    border-color: rgba(251, 146, 60, 0.4);
+    box-shadow: 0 0 30px rgba(251, 146, 60, 0.2);
+}
+
+.skills__card--blue .tech-badge {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+.skills__card--blue:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.skills__card--violet .tech-badge {
+    background: rgba(167, 139, 250, 0.1);
+    border-color: rgba(167, 139, 250, 0.3);
+    color: var(--accent-purple-light);
+}

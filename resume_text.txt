@@ -1,0 +1,47 @@
+Pritam Chavan
+Mumbai, Maharashtra
+9130238226 pcchavan b23@et.vjti.ac.in linkedin.com/in/chavanpritam github.com/pritam195
+Education
+Veermata Jijabai Technological Institute (VJTI) July 2023 – May 2027
+B.Tech in Electronics and Telecommunication (Minor in Data Science) (CPI: 7.70) Mumbai, Maharashtra
+Relevant Coursework
+• C++ Programming • Data Science • Object-Oriented Programming
+• Python Programming • Computer Communication Network
+Technical Skills
+Languages: C++, JavaScript, Python, SQL Tools: Git, GitHub, Postman, VS Code
+Frontend: HTML, CSS, Tailwind CSS, React.js Libraries: Numpy, Pandas , Matplotlib, Seaborn
+Backend: Node.js, Express.js, Socket.IO, Axios CS Fundamentals: DSA, OOP, DBMS, OS
+Databases: MongoDB, MySQL
+Projects
+Credit Risk Default Prediction & Portfolio Segmentation § Oct 2025
+Built an end-to-end machine learning system to estimate borrower probability of default and support credit portfolio risk
+management.
+• Tools & technologies used: Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+• Trained and evaluated 2 ML models (Logistic Regression, Random Forest) on 5,000 borrower records, achieving
+87% AUC-ROC.
+• Engineered 14+ financial and behavioral features and identified top 5 default risk drivers using feature
+importance analysis.
+• Segmented the credit portfolio into 4 risk bands, enabling early-warning insights for high-risk borrower monitoring.
+CampusCart – MERN Stack Campus Marketplace § July 2025
+Developed a secure full-stack campus marketplace enabling peer-to-peer buying and selling with optimized performance and
+authentication.
+• Tools & technologies used: React.js, Node.js, Express.js, MongoDB, Tailwind CSS, JWT, Axios
+• Designed and implemented 20+ RESTful APIs with JWT authentication and a modular 5-collection MongoDB
+schema.
+• Built a responsive React SPA with 12+ reusable components and Context-based authentication for user and session
+management.
+• Optimized frontend performance using pagination and lazy loading, reducing page load time by 30%.
+Mentors Connect – Real-Time Mentorship Platform § June 2025
+Engineered a real-time mentor–student interaction platform with instant virtual sessions and secure communication.
+• Tools & technologies used: React.js, Node.js, Express.js, MongoDB, Zoom API, Socket.IO, JWT
+• Integrated Zoom API to automate instant meeting creation using OAuth-based authorization and REST endpoints.
+• Developed a real-time chat system using Socket.IO with event-driven messaging and persistent message storage in
+MongoDB.
+• Implemented 2-layer session security using JWT-based authentication and HTTP-only cookies.
+Achievements and Certifications
+• Led a team of 6 members to clear the internal college round of Smart India Hackathon (SIH) at VJTI, demonstrating
+leadership, ideation, and technical execution skills.
+• Solved 400+ Data Structures and Algorithms problems on LeetCode.
+• Achieved a 2⋆ rating on CodeChef in competitive programming.
+• Full Stack Web Development – Udemy (2025): Gained practical experience in building MERN stack applications with
+JWT-based authentication, responsive design, and API-driven backend systems.
