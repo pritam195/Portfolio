@@ -1,4 +1,7 @@
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import seed_database
@@ -22,6 +25,8 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     seed_database()
+    key = os.getenv("OPENROUTER_API_KEY", "")
+    logging.info(f"[STARTUP] OPENROUTER_API_KEY loaded: '{key[:12]}...' (len={len(key)})")
 
 # Include routers
 app.include_router(resume.router, prefix="/api")
