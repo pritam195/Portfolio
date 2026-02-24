@@ -15,10 +15,12 @@ AI_MODEL = "openai/gpt-4o-mini"
 
 
 def build_resume_context(resume: dict) -> str:
-    """Convert resume dict to a readable text blob for the AI prompt."""
+    """Convert resume dict to a rich, structured text for the AI system prompt."""
     lines = []
 
+    lines.append("=== PERSONAL INFORMATION ===")
     lines.append(f"Name: {resume.get('name')}")
+    lines.append(f"Bio / Tagline: {resume.get('tagline', '')}")
     lines.append(f"Location: {resume.get('location')}")
     lines.append(f"Phone: {resume.get('phone')}")
     lines.append(f"Email: {resume.get('email')}")
@@ -26,33 +28,34 @@ def build_resume_context(resume: dict) -> str:
     lines.append(f"GitHub: {resume.get('github')}")
     lines.append("")
 
-    # Education
+    lines.append("=== EDUCATION ===")
     for edu in resume.get("education", []):
-        lines.append(f"Education: {edu['degree']} at {edu['institution']}")
-        lines.append(f"  Duration: {edu['duration']}, Location: {edu['location']}")
-        lines.append(f"  CPI/CGPA: {edu['cpi']}")
-        lines.append(f"  Coursework: {', '.join(edu['coursework'])}")
+        lines.append(f"Institution: {edu['institution']}")
+        lines.append(f"Degree: {edu['degree']}")
+        lines.append(f"Duration: {edu['duration']}")
+        lines.append(f"Location: {edu['location']}")
+        lines.append(f"CPI/CGPA: {edu['cpi']}")
+        lines.append(f"Relevant Coursework: {', '.join(edu['coursework'])}")
     lines.append("")
 
-    # Skills
+    lines.append("=== TECHNICAL SKILLS ===")
     skills = resume.get("skills", {})
     for category, items in skills.items():
-        lines.append(f"Skills - {category}: {', '.join(items)}")
+        lines.append(f"{category}: {', '.join(items)}")
     lines.append("")
 
-    # Projects
+    lines.append("=== PROJECTS ===")
     for proj in resume.get("projects", []):
-        lines.append(f"Project: {proj['title']} ({proj['date']})")
-        lines.append(f"  Type: {proj['type']}")
-        lines.append(f"  Description: {proj['description']}")
-        lines.append(f"  Technologies: {', '.join(proj['technologies'])}")
-        lines.append("  Highlights:")
+        lines.append(f"Project Title: {proj['title']} ({proj['date']})")
+        lines.append(f"Type: {proj['type']}")
+        lines.append(f"Description: {proj['description']}")
+        lines.append(f"Technologies Used: {', '.join(proj['technologies'])}")
+        lines.append("Key Highlights:")
         for h in proj["highlights"]:
-            lines.append(f"    - {h}")
-    lines.append("")
+            lines.append(f"  - {h}")
+        lines.append("")
 
-    # Achievements
-    lines.append("Achievements & Certifications:")
+    lines.append("=== ACHIEVEMENTS & CERTIFICATIONS ===")
     for ach in resume.get("achievements", []):
         lines.append(f"  - {ach}")
 
@@ -61,16 +64,13 @@ def build_resume_context(resume: dict) -> str:
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    # Read key from environment (set OPENROUTER_API_KEY in Render dashboard)
     api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
-
-    # DEBUG: log what key we actually have
-    logging.info(f"[CHAT DEBUG] api_key len={len(api_key)}, first12={api_key[:12]!r}, repr={api_key!r}")
+    logging.info(f"[CHAT] api_key len={len(api_key)}, prefix={api_key[:12]!r}")
 
     if not api_key:
         raise HTTPException(
             status_code=500,
-            detail="OpenRouter API key not configured. Please set OPENROUTER_API_KEY in environment variables."
+            detail="OpenRouter API key not configured. Please set OPENROUTER_API_KEY as an environment variable."
         )
 
     collection = get_resume_collection()
@@ -80,19 +80,30 @@ async def chat(request: ChatRequest):
 
     resume_context = build_resume_context(resume)
 
-    system_prompt = f"""You are an AI assistant for Pritam Chavan's personal portfolio website.
-Your ONLY job is to answer questions about Pritam based on the resume data provided below.
+    system_prompt = f"""You are a friendly and professional AI assistant embedded in Pritam Chavan's personal portfolio website.
 
-STRICT RULES:
-1. Answer ONLY from the information in the resume context below.
-2. Do NOT add, invent, or assume any information not explicitly present in the resume.
-3. If the question cannot be answered from the resume, say: "I can only answer questions about Pritam's resume and portfolio. That information isn't available here."
-4. Keep answers concise, friendly, and professional.
-5. Use first person when referring to Pritam's accomplishments (e.g., "Pritam has..." or "He built...").
+Your role is to represent Pritam accurately and help visitors learn about him — his background, skills, projects, education, and achievements.
 
---- RESUME CONTEXT ---
+INTRODUCTION (use this when someone asks "who is Pritam", "introduce yourself", "tell me about him", etc.):
+Pritam Chavan is a B.Tech student at Veermata Jijabai Technological Institute (VJTI), Mumbai, pursuing Electronics and Telecommunication with a Minor in Data Science (Batch 2023–2027). He has a CPI of 7.70.
+He is passionate about building scalable full-stack web applications using the MERN stack and AI-driven backend systems.
+His key projects include:
+- CampusCart: A full-stack campus marketplace with JWT auth and 20+ RESTful APIs
+- Mentors Connect: A real-time mentorship platform using Socket.IO and Zoom API
+- Credit Risk Default Prediction: An ML system achieving 87% AUC-ROC on 5,000 borrower records
+He has solved 400+ DSA problems on LeetCode and holds a 2-star rating on CodeChef.
+He has also led a team of 6 to clear the internal round of Smart India Hackathon (SIH) at VJTI.
+
+RULES:
+1. Answer ONLY from the resume data provided below — never invent or assume information.
+2. Be warm and professional. Refer to Pritam in third person (e.g., "Pritam has...", "He built...").
+3. For unrelated questions (e.g., general coding help, current events), say: "I'm Pritam's portfolio assistant — I can only answer questions about him. Feel free to ask about his skills, projects, or background!"
+4. Keep answers clear and concise. Use bullet points when listing multiple items.
+5. For contact info, share: Email: {resume.get('email')} | LinkedIn: {resume.get('linkedin')} | GitHub: {resume.get('github')}
+
+--- RESUME DATA ---
 {resume_context}
---- END OF RESUME ---
+--- END OF RESUME DATA ---
 """
 
     try:
@@ -111,8 +122,8 @@ STRICT RULES:
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": request.question}
                     ],
-                    "max_tokens": 500,
-                    "temperature": 0.3
+                    "max_tokens": 600,
+                    "temperature": 0.4
                 }
             )
             response.raise_for_status()
@@ -122,6 +133,9 @@ STRICT RULES:
 
     except httpx.HTTPStatusError as e:
         logging.error(f"[CHAT ERROR] OpenRouter {e.response.status_code}: {e.response.text}")
-        raise HTTPException(status_code=e.response.status_code, detail=f"OpenRouter error: {e.response.text}")
+        raise HTTPException(
+            status_code=e.response.status_code,
+            detail=f"OpenRouter error: {e.response.text}"
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Chat error: {str(e)}")
