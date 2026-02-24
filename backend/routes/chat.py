@@ -1,4 +1,4 @@
-import json
+import logging
 import httpx
 import os
 from fastapi import APIRouter, HTTPException
@@ -6,11 +6,10 @@ from dotenv import load_dotenv
 from models import ChatRequest, ChatResponse
 from database import get_resume_collection
 
-load_dotenv(override=True)
+load_dotenv()
 
 router = APIRouter()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 AI_MODEL = "openai/gpt-4o-mini"
 
@@ -62,8 +61,13 @@ def build_resume_context(resume: dict) -> str:
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    api_key = os.getenv("OPENROUTER_API_KEY", "")
-    if not api_key or api_key == "your_openrouter_api_key_here":
+    # Read key from environment (set OPENROUTER_API_KEY in Render dashboard)
+    api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+
+    # DEBUG: log what key we actually have
+    logging.info(f"[CHAT DEBUG] api_key len={len(api_key)}, first12={api_key[:12]!r}, repr={api_key!r}")
+
+    if not api_key:
         raise HTTPException(
             status_code=500,
             detail="OpenRouter API key not configured. Please set OPENROUTER_API_KEY in environment variables."
@@ -117,6 +121,7 @@ STRICT RULES:
             return ChatResponse(answer=answer)
 
     except httpx.HTTPStatusError as e:
+        logging.error(f"[CHAT ERROR] OpenRouter {e.response.status_code}: {e.response.text}")
         raise HTTPException(status_code=e.response.status_code, detail=f"OpenRouter error: {e.response.text}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Chat error: {str(e)}")

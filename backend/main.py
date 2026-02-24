@@ -9,14 +9,11 @@ from routes import resume, chat
 
 app = FastAPI(title="Pritam Chavan Portfolio API", version="1.0.0")
 
-# CORS — restrict to frontend URL in production, allow all in dev
-FRONTEND_URL = os.getenv("FRONTEND_URL", "https://portfolio-three-pearl-26.vercel.app")
-allowed_origins = [FRONTEND_URL, "http://localhost:5173"] if FRONTEND_URL else ["*"]
-
+# CORS — allow all origins (public portfolio API)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
