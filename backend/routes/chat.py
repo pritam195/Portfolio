@@ -62,13 +62,11 @@ def build_resume_context(resume: dict) -> str:
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    # Re-read key on every request so live .env changes are picked up
-    load_dotenv(override=True)
     api_key = os.getenv("OPENROUTER_API_KEY", "")
     if not api_key or api_key == "your_openrouter_api_key_here":
         raise HTTPException(
             status_code=500,
-            detail="OpenRouter API key not configured. Please set OPENROUTER_API_KEY in backend/.env"
+            detail="OpenRouter API key not configured. Please set OPENROUTER_API_KEY in environment variables."
         )
 
     collection = get_resume_collection()
@@ -100,7 +98,7 @@ STRICT RULES:
                 headers={
                     "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "http://localhost:5173",
+                    "HTTP-Referer": "https://portfolio-three-pearl-26.vercel.app",
                     "X-Title": "Pritam Chavan Portfolio"
                 },
                 json={
