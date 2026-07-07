@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { BriefcaseBusiness, CalendarDays, CheckCircle2, MapPin } from "lucide-react";
 import SectionHeading from "./SectionHeading.jsx";
 
@@ -7,64 +7,71 @@ const internshipHighlights = [
   "Integrated the chatbot frontend with Node.js/Express REST APIs for query dispatch, FAQ-based response matching, fallback handling, and API error-state management."
 ];
 
+const techStack = ["React.js", "Tailwind CSS", "Node.js", "Express APIs"];
+
 export default function Experience() {
   return (
-    <section id="experience" className="relative border-b border-white/10 bg-surface-900/70">
-      <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-teal-300/[0.06] to-transparent" />
+    <section id="experience" className="relative">
+      <div className="section-divider" />
       <div className="section-shell">
         <SectionHeading
-          eyebrow="Internship"
-          title="Hands-on internship experience with frontend ownership and API integration."
-          description="A quick role snapshot with company, timeline, stack, and implementation work recruiters can scan fast."
+          eyebrow="Experience"
+          title="Hands-on internship with frontend ownership and API integration."
+          description="A focused role snapshot with company, timeline, stack, and implementation details."
         />
 
         <motion.div
-          className="mx-auto max-w-5xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
-          <article className="panel relative overflow-hidden rounded-xl p-6 sm:p-8">
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-teal-300 via-amber-300 to-transparent" />
-            <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-teal-300/12 blur-3xl" />
-            <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-              <div className="relative">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-lg border border-teal-300/40 bg-teal-300/10 p-3 text-teal-200">
-                  <BriefcaseBusiness size={24} />
-                </div>
-                <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">
-                  Software Development Engineer Intern
-                </p>
-                <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
-                  Monarch Techno Engineering Solutions Pvt. Ltd.
-                </h3>
-                <div className="mt-5 grid gap-3 text-sm text-zinc-400 sm:grid-cols-2 lg:grid-cols-1">
-                  <span className="inline-flex items-center gap-2 rounded border border-white/10 bg-white/[0.04] px-3 py-2">
-                    <MapPin size={16} /> Navi Mumbai
-                  </span>
-                  <span className="inline-flex items-center gap-2 rounded border border-white/10 bg-white/[0.04] px-3 py-2">
-                    <CalendarDays size={16} /> Jun 2026
-                  </span>
-                </div>
-              </div>
+          <article className="card rounded-xl overflow-hidden">
+            {/* Top accent bar */}
+            <div className="h-px bg-gradient-to-r from-blue-500 via-blue-400/50 to-transparent" />
 
-              <div>
-                <div className="mb-5 flex flex-wrap gap-2">
-                  {["React.js", "Tailwind CSS", "Node.js", "Express APIs"].map((item) => (
-                    <span key={item} className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-xs font-bold text-amber-100">
-                      {item}
+            <div className="p-6 sm:p-8">
+              <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+                {/* Left: role info */}
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-blue-500/25 bg-blue-500/10 text-blue-400 mb-5">
+                    <BriefcaseBusiness size={22} />
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 mb-1">
+                    Software Development Engineer Intern
+                  </p>
+                  <h3 className="text-xl font-bold text-white sm:text-2xl leading-tight">
+                    Monarch Techno Engineering Solutions
+                  </h3>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <span className="tag flex items-center gap-1.5">
+                      <MapPin size={12} /> Navi Mumbai
                     </span>
+                    <span className="tag flex items-center gap-1.5">
+                      <CalendarDays size={12} /> Jun 2026
+                    </span>
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {techStack.map((item) => (
+                      <span key={item} className="tag tag-blue">{item}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: highlights */}
+                <div className="flex flex-col gap-3">
+                  {internshipHighlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="flex gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4"
+                    >
+                      <CheckCircle2 className="mt-0.5 shrink-0 text-blue-400" size={16} />
+                      <p className="text-sm leading-6 text-[#9d9db0]">{highlight}</p>
+                    </div>
                   ))}
                 </div>
-                <ul className="grid gap-4 leading-7 text-zinc-300">
-                  {internshipHighlights.map((highlight) => (
-                    <li key={highlight} className="flex gap-3 rounded-lg border border-white/10 bg-white/[0.035] p-4">
-                      <CheckCircle2 className="mt-1 shrink-0 text-teal-300" size={18} />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </article>
@@ -73,4 +80,3 @@ export default function Experience() {
     </section>
   );
 }
-

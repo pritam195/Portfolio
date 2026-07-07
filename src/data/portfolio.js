@@ -1,4 +1,4 @@
-﻿import {
+import {
   BrainCircuit,
   Code2,
   Database,
@@ -13,7 +13,7 @@
   Video
 } from "lucide-react";
 
-export const resumePath = "/Pritam_Chavan_Resume.txt";
+export const resumePath = "/Resume 07.pdf";
 
 export const socialLinks = {
   github: "https://github.com/pritam195",
@@ -76,7 +76,7 @@ export const skillGroups = [
   {
     title: "AI, ML & Data",
     icon: BrainCircuit,
-    tone: "cyan",
+    tone: "blue",
     skills: ["scikit-learn", "pandas", "NumPy", "Sentence Transformers", "Matplotlib", "pdfplumber", "Gemini API"]
   },
   {
@@ -100,7 +100,8 @@ export const projects = [
     title: "ResumeAI",
     subtitle: "AI-Powered Resume Analyzer",
     description:
-      "A full-stack AI resume analysis platform that evaluates resumes against job descriptions and provides skill match, resume quality, semantic similarity, and improvement feedback.",
+      "Full-stack resume intelligence platform that compares resumes with job descriptions and returns match quality, semantic similarity, and improvement feedback.",
+    metric: { value: "25+", label: "tech categories parsed" },
     categories: ["Full Stack", "ML", "Data"],
     techStack: [
       "React",
@@ -114,8 +115,8 @@ export const projects = [
       "Tailwind CSS"
     ],
     highlights: [
-      "3-tier microservice architecture: React frontend, Express backend, Flask ML service",
-      "Aho-Corasick O(n) skill extraction across 25+ tech categories with alias canonicalization",
+      "3-tier architecture: React frontend, Express backend, Flask ML service",
+      "Aho-Corasick O(n) skill extraction with alias canonicalization",
       "10-dimension resume quality engine with weighted scoring and semantic similarity",
       "Secure authentication with Firebase Auth and JWT"
     ],
@@ -127,7 +128,8 @@ export const projects = [
     title: "CampusCart",
     subtitle: "Real-Time Campus Marketplace",
     description:
-      "A MERN-based campus marketplace for students to buy and sell products with real-time chat, authentication, product listings, orders, and feedback.",
+      "MERN marketplace for campus buying and selling with authentication, product listings, orders, feedback, image uploads, and buyer-seller chat.",
+    metric: { value: "20+", label: "REST APIs across 6 modules" },
     categories: ["Full Stack", "Real-Time"],
     techStack: [
       "React",
@@ -146,7 +148,6 @@ export const projects = [
       "20+ RESTful APIs across 6 modules",
       "Real-time buyer-seller chat using Socket.IO",
       "JWT authentication, bcrypt password hashing, and protected routes",
-      "Multi-image upload pipeline via Multer and Cloudinary",
       "Vercel, Render, and MongoDB Atlas deployment with restricted CORS origins"
     ],
     icon: Globe2,
@@ -157,11 +158,12 @@ export const projects = [
     title: "SafeRoutePlanner",
     subtitle: "Safety-Aware Route Planner",
     description:
-      "A safety-focused navigation system that computes and compares the safest and shortest pedestrian routes using graph algorithms and geospatial safety scoring.",
+      "Navigation system that compares safest and shortest pedestrian routes using graph algorithms and geospatial safety scoring on Mumbai road data.",
+    metric: { value: "108K", label: "road segments analyzed" },
     categories: ["ML", "Data"],
     techStack: ["React", "Leaflet.js", "Express", "Flask", "Python", "OSMnx", "NetworkX", "GeoPandas", "Shapely"],
     highlights: [
-      "Modified Dijkstra's algorithm on OpenStreetMap data for safest/shortest route comparison",
+      "Modified Dijkstra algorithm for safest and shortest route comparison",
       "5-feature safety-scoring engine for 108,000 Mumbai road segments",
       "Grid-based graph caching for optimized route computation",
       "Interactive Leaflet.js interface with segment-level safety visualization"
@@ -174,13 +176,14 @@ export const projects = [
     title: "Vync",
     subtitle: "Real-Time Meeting Platform",
     description:
-      "A production-oriented video meeting platform with real-time communication, collaborative tools, and host controls.",
+      "Video meeting platform with authenticated and guest meetings, chat, whiteboard, live code collaboration, waiting rooms, and host controls.",
+    metric: { value: "STUN/TURN", label: "WebRTC fallback support" },
     categories: ["Full Stack", "Real-Time"],
     techStack: ["React", "Node.js", "Express", "MongoDB", "Socket.IO", "WebRTC", "Redis", "JWT", "Docker", "coturn"],
     highlights: [
-      "WebRTC and Socket.IO signaling for authenticated/guest meetings with audio-video, chat, and file sharing",
+      "WebRTC and Socket.IO signaling for audio-video, chat, and file sharing",
       "Collaborative whiteboard and live code editor",
-      "Redis-backed active room state for participants, waiting rooms, whiteboard state, and live code state",
+      "Redis-backed active room state for participants, waiting rooms, whiteboard, and code",
       "coturn TURN server with STUN/TURN fallback, containerized via Docker Compose"
     ],
     icon: Video,
@@ -191,7 +194,8 @@ export const projects = [
     title: "Credit Risk Default Prediction",
     subtitle: "ML Risk Banding Model",
     description:
-      "A machine learning project predicting loan default risk and segmenting borrowers into risk bands, built on the LendingClub dataset.",
+      "Machine learning model that predicts loan default risk, compares classifiers, and groups borrowers into explainable risk bands.",
+    metric: { value: "87%", label: "AUC-ROC achieved" },
     categories: ["ML", "Data"],
     techStack: ["Python", "pandas", "NumPy", "scikit-learn", "Logistic Regression", "Random Forest"],
     highlights: [
@@ -238,7 +242,3 @@ export const achievements = [
     icon: Users
   }
 ];
-
-
-
-

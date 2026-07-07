@@ -9,28 +9,30 @@ export default function Projects() {
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return projects;
-    return projects.filter((project) => project.categories.includes(activeFilter));
+    return projects.filter((p) => p.categories.includes(activeFilter));
   }, [activeFilter]);
 
   return (
-    <section id="projects" className="border-b border-white/10 bg-surface-900/70">
+    <section id="projects" className="relative">
+      <div className="section-divider" />
       <div className="section-shell">
         <SectionHeading
           eyebrow="Projects"
-          title="Impact-oriented builds across full stack, realtime, ML, and data."
-          description="Each project card includes recruiter-friendly context: problem, stack, implementation highlights, GitHub links, and live demos only where available."
+          title="Selected builds with engineering proof."
+          description="Full-stack, realtime, and AI/data projects with implementation details that matter."
         />
 
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        {/* Filter pills */}
+        <div className="flex flex-wrap gap-2 mb-8">
           {projectFilters.map((filter) => (
             <button
               key={filter}
               type="button"
               onClick={() => setActiveFilter(filter)}
-              className={`focus-ring rounded border px-4 py-2 text-sm font-bold transition ${
+              className={`focus-ring rounded-lg border px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
                 activeFilter === filter
-                  ? "border-teal-300 bg-teal-300 text-black"
-                  : "border-white/10 bg-white/[0.04] text-zinc-300 hover:border-teal-300/50 hover:text-white"
+                  ? "border-blue-500 bg-blue-500/15 text-blue-200"
+                  : "border-white/[0.08] text-[#7c7c8a] hover:border-blue-500/30 hover:text-white"
               }`}
             >
               {filter}
@@ -38,7 +40,8 @@ export default function Projects() {
           ))}
         </div>
 
-        <motion.div layout className="grid gap-5 lg:grid-cols-2">
+        {/* Project grid */}
+        <motion.div layout className="grid gap-4 lg:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <ProjectCard key={project.title} project={project} index={index} />

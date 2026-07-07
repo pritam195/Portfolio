@@ -1,4 +1,4 @@
-﻿import Navbar from "./components/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
 import Skills from "./components/Skills.jsx";
@@ -11,7 +11,7 @@ import CustomCursor from "./components/CustomCursor.jsx";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-surface-950 text-zinc-100">
+    <div className="min-h-screen bg-surface-950 text-[#f1f1f3]">
       <CustomCursor />
       <Navbar />
       <main>
@@ -27,4 +27,3 @@ export default function App() {
     </div>
   );
 }
-

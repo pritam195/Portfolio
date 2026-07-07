@@ -1,37 +1,45 @@
-﻿import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiCodechef, SiLeetcode } from "react-icons/si";
 import { socialLinks } from "../data/portfolio.js";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-surface-950">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-4 py-8 text-center sm:flex-row sm:px-6 sm:text-left lg:px-8">
-        <div>
-          <p className="font-black text-white">Pritam Chavan</p>
-          <p className="mt-1 text-sm text-zinc-500">Aspiring Software Engineer | Full Stack | AI/ML</p>
-        </div>
-        <div className="flex items-center gap-3">
-          {[
-            ["GitHub", socialLinks.github, FaGithub],
-            ["LinkedIn", socialLinks.linkedin, FaLinkedin],
-            ["LeetCode", socialLinks.leetcode, SiLeetcode],
-            ["CodeChef", socialLinks.codechef, SiCodechef]
-          ].map(([label, href, Icon]) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded border border-white/10 bg-white/[0.04] text-zinc-300 transition hover:border-teal-300/50 hover:text-teal-200"
-            >
-              <Icon size={18} />
-            </a>
-          ))}
+    <footer className="relative">
+      <div className="section-divider" />
+      <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8 lg:px-10">
+        <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+          <div>
+            <p className="text-sm font-bold text-white">
+              Pritam<span className="text-blue-400">.</span>
+            </p>
+            <p className="mt-0.5 text-xs text-[#7c7c8a]">
+              © {year} · Aspiring Software Engineer
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {[
+              ["GitHub", socialLinks.github, FaGithub],
+              ["LinkedIn", socialLinks.linkedin, FaLinkedin],
+              ["LeetCode", socialLinks.leetcode, SiLeetcode],
+              ["CodeChef", socialLinks.codechef, SiCodechef]
+            ].map(([label, href, Icon]) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.07] text-[#7c7c8a] transition hover:border-blue-500/30 hover:text-blue-400 hover:-translate-y-0.5"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-
-

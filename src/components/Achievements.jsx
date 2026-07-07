@@ -4,31 +4,40 @@ import SectionHeading from "./SectionHeading.jsx";
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="border-b border-white/10 bg-surface-900/70">
+    <section id="achievements" className="relative">
+      <div className="section-divider" />
       <div className="section-shell">
         <SectionHeading
           eyebrow="Achievements"
-          title="Competitive programming, hackathons, mentorship, and team discipline."
-          description="A snapshot of the signals that complement the project work."
+          title="Hackathons, competitive programming, and community."
+          description="Signals that complement the project work."
         />
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {achievements.map((achievement, index) => {
             const Icon = achievement.icon;
             return (
               <motion.article
                 key={achievement.title}
-                className="panel rounded-lg p-6 transition hover:-translate-y-1 hover:border-amber-300/40"
-                initial={{ opacity: 0, y: 18 }}
+                className="card rounded-xl p-5 group flex gap-4"
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.45, delay: index * 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
               >
-                <div className="mb-5 inline-flex rounded border border-amber-300/30 bg-amber-300/10 p-3 text-amber-200">
-                  <Icon size={22} />
+                {/* Index number + icon */}
+                <div className="shrink-0 flex flex-col items-center gap-2">
+                  <span className="text-xs font-bold text-[#7c7c8a] tabular-nums">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="h-8 w-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 transition group-hover:bg-blue-500/15">
+                    <Icon size={16} />
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white">{achievement.title}</h3>
-                <p className="mt-3 leading-7 text-zinc-400">{achievement.description}</p>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-bold text-white leading-snug">{achievement.title}</h3>
+                  <p className="mt-1.5 text-xs leading-5 text-[#7c7c8a]">{achievement.description}</p>
+                </div>
               </motion.article>
             );
           })}
