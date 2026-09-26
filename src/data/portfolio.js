@@ -13,7 +13,7 @@ import {
   Video
 } from "lucide-react";
 
-export const resumePath = "/Resume 07.pdf";
+export const resumePath = "https://drive.google.com/file/d/1unSHES8ajpaTugD_jynoqtSlyZgaHhwM/view?usp=sharing";
 
 export const socialLinks = {
   github: "https://github.com/pritam195",

@@ -2,9 +2,30 @@ import { motion } from "framer-motion";
 import { skillGroups } from "../data/portfolio.js";
 import SectionHeading from "./SectionHeading.jsx";
 
-export default function Skills() {
-  const totalSkills = skillGroups.reduce((sum, group) => sum + group.skills.length, 0);
+const allSkills = skillGroups.flatMap((g) => g.skills.map((s) => ({ skill: s, group: g.title })));
+const chunk = Math.ceil(allSkills.length / 3);
+const rows = [allSkills.slice(0, chunk), allSkills.slice(chunk, chunk * 2), allSkills.slice(chunk * 2)];
 
+function MarqueeRow({ items, reverse = false, duration = 28 }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden"
+      style={{ maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)" }}>
+      <motion.div className="flex gap-2.5 w-max"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ x: { repeat: Infinity, repeatType: "loop", duration, ease: "linear" } }}>
+        {doubled.map((item, i) => (
+          <span key={i} className="tag flex-shrink-0 whitespace-nowrap py-1.5 px-3 text-[13px] hover:tag-blue transition-all duration-200 cursor-default">
+            {item.skill}
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+export default function Skills() {
+  const total = skillGroups.reduce((s, g) => s + g.skills.length, 0);
   return (
     <section id="skills" className="relative">
       <div className="section-divider" />
@@ -12,46 +33,32 @@ export default function Skills() {
         <SectionHeading
           eyebrow="Skills"
           title="A practical stack for building complete software."
-          description={`${skillGroups.length} skill categories · ${totalSkills} tools and technologies used across real projects.`}
+          description={`${skillGroups.length} categories · ${total} technologies across real projects.`}
         />
+        <motion.div className="space-y-3"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          {rows.map((row, i) => <MarqueeRow key={i} items={row} reverse={i % 2 === 1} duration={26 + i * 4} />)}
+        </motion.div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 mt-4">
-          {skillGroups.map((group, index) => {
-            const Icon = group.icon;
+        <motion.div className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
+          {skillGroups.map((g) => {
+            const Icon = g.icon;
             return (
-              <motion.article
-                key={group.title}
-                className="card rounded-xl p-5 group"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-              >
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-8 w-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 transition group-hover:bg-blue-500/15">
-                      <Icon size={16} />
-                    </div>
-                    <h3 className="text-sm font-semibold text-white">{group.title}</h3>
-                  </div>
-                  <span className="text-xs text-[#7c7c8a] font-medium tabular-nums">
-                    {group.skills.length}
-                  </span>
+              <div key={g.title} className="card-glow rounded-xl px-4 py-3 flex items-center gap-3 group transition-all duration-200 hover:-translate-y-px">
+                <div className="h-8 w-8 shrink-0 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 transition group-hover:bg-blue-500/18">
+                  <Icon size={15} />
                 </div>
-
-                {/* Skill chips */}
-                <div className="flex flex-wrap gap-1.5">
-                  {group.skills.map((skill) => (
-                    <span key={skill} className="tag transition hover:border-blue-500/30 hover:text-blue-300">
-                      {skill}
-                    </span>
-                  ))}
+                <div className="min-w-0">
+                  <p className="text-[13px] font-medium text-white truncate">{g.title}</p>
+                  <p className="text-[11px] text-[#666680]">{g.skills.length} skills</p>
                 </div>
-              </motion.article>
+              </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

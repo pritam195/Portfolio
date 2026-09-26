@@ -1,90 +1,79 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { Github } from "lucide-react";
 
-const visibleTechCount = 6;
+const ICON_CLS = "bg-cyan-500/10 border-cyan-500/20 text-cyan-400";
 
 export default function ProjectCard({ project, index }) {
   const Icon = project.icon;
-  const visibleTech = project.techStack.slice(0, visibleTechCount);
-  const hiddenTechCount = project.techStack.length - visibleTech.length;
-  const topHighlights = project.highlights.slice(0, 3);
+  const visible = project.techStack.slice(0, 5);
+  const extra   = project.techStack.length - visible.length;
 
   return (
     <motion.article
       layout
-      className="card rounded-xl overflow-hidden flex flex-col h-full group"
-      initial={{ opacity: 0, y: 16 }}
+      className="card-glow rounded-2xl overflow-hidden flex flex-col h-full group"
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
+      whileHover={{ y: -4 }}
     >
-      {/* Top accent */}
-      <div className="h-px bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
+      {/* ── Gradient top bar ── */}
+      <div className="h-[2px] bg-gradient-to-r from-cyan-500 to-blue-500" />
 
-      <div className="p-6 flex flex-col flex-1">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-400 mb-1.5">
+      <div className="p-5 sm:p-6 flex flex-col flex-1">
+        {/* Header: title + icon */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-[#666680] mb-1">
               {project.subtitle}
             </p>
-            <h3 className="text-xl font-bold text-white leading-tight">{project.title}</h3>
+            <h3 className="font-display text-lg sm:text-[19px] font-bold text-white leading-tight">
+              {project.title}
+            </h3>
           </div>
-          <div className="shrink-0 h-10 w-10 rounded-lg border border-blue-500/20 bg-blue-500/10 flex items-center justify-center text-blue-400">
-            <Icon size={20} />
+          {/* Icon box */}
+          <div className={`shrink-0 h-9 w-9 sm:h-10 sm:w-10 rounded-xl border flex items-center justify-center transition group-hover:scale-110 duration-300 ${ICON_CLS}`}>
+            <Icon size={17} />
           </div>
         </div>
 
         {/* Category tags */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-3.5">
           {project.categories.map((cat) => (
-            <span key={cat} className="tag tag-blue">{cat}</span>
+            <span key={cat} className="tag tag-cyan text-[10px] sm:text-[11px]">{cat}</span>
           ))}
         </div>
 
         {/* Description */}
-        <p className="text-sm leading-6 text-[#7c7c8a] mb-5">{project.description}</p>
+        <p className="text-[12.5px] sm:text-[13px] leading-[1.65] text-[#7a7a90] mb-4.5">{project.description}</p>
 
         {/* Highlights */}
         <ul className="grid gap-2 mb-5">
-          {topHighlights.map((highlight) => (
-            <li key={highlight} className="flex gap-2.5 text-xs text-[#9d9db0] leading-5">
-              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500" />
-              {highlight}
+          {project.highlights.slice(0, 3).map((h) => (
+            <li key={h} className="flex gap-2.5 text-[11.5px] sm:text-[12px] text-[#8e8ea0] leading-[1.55]">
+              <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
+              <span>{h}</span>
             </li>
           ))}
         </ul>
 
-        {/* Tech stack */}
+        {/* Tech chips */}
         <div className="flex flex-wrap gap-1.5 mb-6">
-          {visibleTech.map((tech) => (
-            <span key={tech} className="tag">{tech}</span>
-          ))}
-          {hiddenTechCount > 0 && (
-            <span className="tag">+{hiddenTechCount}</span>
-          )}
+          {visible.map((t) => <span key={t} className="tag text-[10px] sm:text-[11px]">{t}</span>)}
+          {extra > 0 && <span className="tag text-[10px] sm:text-[11px]">+{extra}</span>}
         </div>
 
         {/* Actions */}
-        <div className="mt-auto flex gap-2">
+        <div className="mt-auto">
           <a
             href={project.github}
             target="_blank"
             rel="noreferrer"
-            className="btn-ghost flex-1 text-xs py-2 focus-ring rounded-lg"
+            className="btn-ghost focus-ring w-full text-[12.5px] sm:text-[13px] py-2 rounded-xl"
           >
-            <Github size={15} /> GitHub
+            <Github size={14} /> View on GitHub
           </a>
-          {project.live ? (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary flex-1 text-xs py-2 focus-ring rounded-lg"
-            >
-              Live Demo <ExternalLink size={15} />
-            </a>
-          ) : null}
         </div>
       </div>
     </motion.article>
