@@ -97,6 +97,78 @@ export const projectFilters = ["All", "Full Stack", "ML", "Real-Time", "Data"];
 
 export const projects = [
   {
+    title: "Vync",
+    subtitle: "Real-Time Meeting Platform",
+    description:
+      "Video meeting platform with authenticated and guest meetings, real-time chat, collaborative whiteboard, live code editor, waiting rooms, and host controls — built with WebRTC and Socket.IO.",
+    metric: { value: "49", label: "relay UDP ports via coturn" },
+    categories: ["Full Stack", "Real-Time"],
+    techStack: ["React", "Node.js", "Express", "MongoDB", "Socket.IO", "WebRTC", "Redis", "JWT", "Docker", "coturn"],
+    highlights: [
+      "Real-time chat, collaborative whiteboard, and code editor via Socket.IO; WebRTC for peer-to-peer video",
+      "Redis-powered active room-state layer for participants, waiting rooms, whiteboards, and live-code during high-frequency updates",
+      "coturn TURN server with STUN/TURN fallback using 49 relay UDP ports for reliable connectivity across restrictive NATs",
+      "JWT authentication with bcrypt hashing, protecting 19 REST APIs with authorization middleware"
+    ],
+    icon: Video,
+    github: "https://github.com/pritam195/Vync",
+    live: ""
+  },
+  {
+    title: "PulseQueue",
+    subtitle: "Distributed Job Processing Engine",
+    description:
+      "Distributed background job processing engine with priority queues, delayed jobs, at-least-once delivery, configurable worker concurrency, and fault-tolerant recovery mechanisms.",
+    metric: { value: "966", label: "jobs/sec across 20 workers" },
+    categories: ["Full Stack", "Data"],
+    techStack: ["Node.js", "Redis", "MongoDB", "React", "Express"],
+    highlights: [
+      "Atomic Redis Lua operations for priority dequeuing and delayed-job promotion",
+      "Heartbeat leases and a Reaper to automatically recover jobs from crashed workers",
+      "Exponential backoff with jitter and MongoDB-backed Dead Letter Queue (DLQ)",
+      "Benchmarked 966 jobs/sec across 20 workers with 4.0s P99 latency via SIGKILL chaos testing"
+    ],
+    icon: Layers3,
+    github: "https://github.com/pritam195/PulseQueue",
+    live: ""
+  },
+  {
+    title: "Sentinel",
+    subtitle: "Inventory & Dynamic Pricing Engine",
+    description:
+      "Event-driven inventory and dynamic pricing engine that autonomously triggers pricing and reorder recommendations from real-time demand velocity and stock depletion signals.",
+    metric: { value: "SSE", label: "real-time event streaming" },
+    categories: ["Full Stack", "ML"],
+    techStack: ["Node.js", "Express", "MongoDB", "React", "Google Gemini API"],
+    highlights: [
+      "Event-driven engine triggering pricing and reorder recommendations from demand velocity signals",
+      "Google Gemini as pluggable advisory engine behind a Human-in-the-Loop approval workflow with JSON schema validation",
+      "Automatic fallback to rule-based logic on AI drift or failure",
+      "Real-time SSE streaming and idempotent event handling with immutable audit log for complete decision traceability"
+    ],
+    icon: ShieldCheck,
+    github: "https://github.com/pritam195/Sentinel",
+    live: ""
+  },
+  {
+    title: "CodeSense",
+    subtitle: "Codebase RAG Platform",
+    description:
+      "Full-stack RAG platform enabling developers to query unfamiliar codebases in natural language and receive grounded, citation-backed answers via a repository upload and indexing pipeline.",
+    metric: { value: "AST", label: "Tree-sitter chunking" },
+    categories: ["Full Stack", "ML", "Data"],
+    techStack: ["Python", "FastAPI", "React", "FAISS", "Tree-sitter", "Neo4j", "Sentence Transformers"],
+    highlights: [
+      "Code-aware retrieval using Tree-sitter AST-based structure-preserving chunking",
+      "Sentence Transformer embeddings in FAISS with hybrid retrieval combining semantic search and BM25 via RRF",
+      "Full-stack repository upload and indexing pipeline for natural language codebase queries",
+      "Citation-backed answers grounded in actual source code"
+    ],
+    icon: BrainCircuit,
+    github: "https://github.com/pritam195/CodeSense",
+    live: ""
+  },
+  {
     title: "ResumeAI",
     subtitle: "AI-Powered Resume Analyzer",
     description:
@@ -122,7 +194,7 @@ export const projects = [
     ],
     icon: BrainCircuit,
     github: "https://github.com/pritam195/ResumeAI",
-    live: "https://resume-ai-dusky-six.vercel.app/"
+    live: ""
   },
   {
     title: "CampusCart",
@@ -141,7 +213,6 @@ export const projects = [
       "bcrypt",
       "Cloudinary",
       "Multer",
-      "Axios",
       "Tailwind CSS"
     ],
     highlights: [
@@ -152,7 +223,7 @@ export const projects = [
     ],
     icon: Globe2,
     github: "https://github.com/pritam195/CampusCart",
-    live: "https://campus-cart-delta.vercel.app"
+    live: ""
   },
   {
     title: "SafeRoutePlanner",
@@ -170,42 +241,23 @@ export const projects = [
     ],
     icon: ShieldCheck,
     github: "https://github.com/pritam195/SafeRoutePlanner",
-    live: ""
   },
   {
-    title: "Vync",
-    subtitle: "Real-Time Meeting Platform",
-    description:
-      "Video meeting platform with authenticated and guest meetings, chat, whiteboard, live code collaboration, waiting rooms, and host controls.",
-    metric: { value: "STUN/TURN", label: "WebRTC fallback support" },
-    categories: ["Full Stack", "Real-Time"],
-    techStack: ["React", "Node.js", "Express", "MongoDB", "Socket.IO", "WebRTC", "Redis", "JWT", "Docker", "coturn"],
-    highlights: [
-      "WebRTC and Socket.IO signaling for audio-video, chat, and file sharing",
-      "Collaborative whiteboard and live code editor",
-      "Redis-backed active room state for participants, waiting rooms, whiteboard, and code",
-      "coturn TURN server with STUN/TURN fallback, containerized via Docker Compose"
-    ],
-    icon: Video,
-    github: "https://github.com/pritam195/Vync",
-    live: "https://vync-client.vercel.app"
-  },
-  {
-    title: "Credit Risk Default Prediction",
+    title: "Credit Risk Prediction",
     subtitle: "ML Risk Banding Model",
     description:
-      "Machine learning model that predicts loan default risk, compares classifiers, and groups borrowers into explainable risk bands.",
-    metric: { value: "87%", label: "AUC-ROC achieved" },
+      "Compared Logistic Regression and Random Forest models on 5,000 borrower records across 14 financial and behavioral features, achieving a best ROC-AUC of 0.87 with probability-based risk segmentation.",
+    metric: { value: "0.87", label: "ROC-AUC score" },
     categories: ["ML", "Data"],
-    techStack: ["Python", "pandas", "NumPy", "scikit-learn", "Logistic Regression", "Random Forest"],
+    techStack: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn"],
     highlights: [
-      "Built and compared Logistic Regression and Random Forest classifiers",
-      "Segmented borrowers into risk categories based on model output",
-      "Analyzed default-risk drivers including credit score, income, and debt-to-income ratio",
-      "Achieved 87% AUC-ROC on the LendingClub dataset"
+      "Compared Logistic Regression and Random Forest on 5,000 borrower records across 14 financial and behavioral features",
+      "Feature-importance analysis ranked top 5 default-risk drivers: credit score, annual income, and debt-to-income ratio",
+      "Segmented borrowers into 4 probability-based risk bands for early identification and monitoring of risky accounts",
+      "Evaluated both models using classification metrics; achieved best ROC-AUC score of 0.87"
     ],
     icon: Layers3,
-    github: "https://github.com/pritam195",
+    github: "https://github.com/pritam195/Credit-Risk-Default-Prediction",
     live: ""
   }
 ];
@@ -227,18 +279,18 @@ export const achievements = [
     icon: Code2
   },
   {
-    title: "LeetCode",
-    description: "Solved 500+ data structures and algorithms problems.",
+    title: "LeetCode — Knight",
+    description: "500+ problems solved, peak rating 1867.",
     icon: BrainCircuit
   },
   {
-    title: "CodeChef",
-    description: "3-Star coder with a maximum rating of 1601.",
+    title: "CodeChef — 3 Star",
+    description: "Peak rating 1701.",
     icon: Trophy
   },
   {
-    title: "Football Team Member",
-    description: "Balanced competitive sport with engineering projects and academics.",
-    icon: Users
+    title: "Codeforces — Specialist",
+    description: "Peak rating 1519.",
+    icon: Trophy
   }
 ];

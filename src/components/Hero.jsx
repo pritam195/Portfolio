@@ -6,9 +6,9 @@ import { academicProfile, resumePath, socialLinks } from "../data/portfolio.js";
 
 const stats = [
   { value: "1", label: "Internship" },
-  { value: "5", label: "Projects" },
+  { value: "8", label: "Projects" },
   { value: "500+", label: "DSA Problems" },
-  { value: "3★", label: "CodeChef" }
+  { value: "1867", label: "LeetCode Peak" }
 ];
 
 const socials = [

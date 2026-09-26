@@ -3,11 +3,12 @@ import { BriefcaseBusiness, CalendarDays, CheckCircle2, MapPin } from "lucide-re
 import SectionHeading from "./SectionHeading.jsx";
 
 const internshipHighlights = [
-  "Built a responsive chatbot widget using React.js and Tailwind CSS with realtime message rendering, input validation, loading states, and a mobile-friendly UI.",
-  "Integrated the chatbot frontend with Node.js/Express REST APIs for query dispatch, FAQ-based response matching, fallback handling, and API error-state management."
+  "Developed a responsive chatbot widget with voice-based query input and cross-device layout support.",
+  "Built Node.js and Express REST APIs for query processing and keyword matching across 35+ FAQs, with RAG fallback for unmatched queries using relevant company documentation and structured error handling.",
+  "Designed a custom IP-based fixed-window rate limiter using an in-memory hash map to track request counts and timestamps, limiting each client to 10 requests per minute and returning HTTP 429 responses with retry intervals."
 ];
 
-const techStack = ["React.js", "Tailwind CSS", "Node.js", "Express APIs"];
+const techStack = ["React.js", "Node.js", "Express", "RAG", "REST APIs"];
 
 export default function Experience() {
   return (
@@ -46,7 +47,7 @@ export default function Experience() {
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     <span className="tag flex items-center gap-1.5">
-                      <MapPin size={12} /> Navi Mumbai
+                      <MapPin size={12} /> Remote
                     </span>
                     <span className="tag flex items-center gap-1.5">
                       <CalendarDays size={12} /> Jun 2026
